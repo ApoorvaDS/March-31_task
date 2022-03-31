@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function subArraylen(arr, n, K)
+{
+    var mp = new Map();
+ 
+    mp.set(arr[0],0);
+ 
+    for (var i = 1; i < n; i++) {
+ 
+        arr[i] = arr[i] + arr[i - 1];
+        mp.set(arr[i],i);
+    }
+    var len = 10000000000;
+ 
+    for (var i = 0; i < n; i++) {
+        if (arr[i] < K)
+            continue;
+ 
+        else {
+            var x = arr[i] - K;
+
+            if (x == 0)
+                len = Math.min(len, i);
+ 
+                if (!mp.has(x))
+                continue;
+            else {
+                len = Math.min(len, i - mp.get(x));
+            }
+        }
+    }
+ 
+    return len;
+}
+var arr = [1, 2, 3, 4, 2, 4,];
+var n = arr.length;
+var K = 6;
+var len = subArraylen(arr, n, K);
+if (len == 1000000000) {
+    document.write( "-1");
+}
+else {
+    document.write( len );
+}
+    </script>
+</body>
+</html>
